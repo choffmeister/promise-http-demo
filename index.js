@@ -3,6 +3,7 @@ var Bluebird = require('bluebird'),
   example2 = require('./examples/example2'),
   example3 = require('./examples/example3');
 
+//runExamples([example1, example2, example3]);
 runExamples([example1, example2, example3]);
 
 function runExamples (tests) {

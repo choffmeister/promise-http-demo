@@ -5,7 +5,7 @@ var HttpClient = require('../lib/HttpClient');
  * from the previous request.
  */
 module.exports = function () {
-  var client = new HttpClient('http://coreci.choffmeister.de/api', JSON.stringify, JSON.parse);
+  var client = new HttpClient.Json('http://coreci.choffmeister.de/api');
   return client
     .get('/builds')
     .then(function (builds) {
