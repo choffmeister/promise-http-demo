@@ -5,13 +5,16 @@ var HttpClient = require('../lib/HttpClient');
  * from the previous request.
  */
 module.exports = function () {
-  var client = new HttpClient.Json('http://coreci.choffmeister.de/api');
+  var client = new HttpClient.JsonHttpClient('http://coreci.choffmeister.de/api');
   return client
     .get('/builds')
-    .then(function (builds) {
-      return client.get('/projects/' + builds[0].projectCanonicalName + '/builds/' + builds[0].number);
+    .then(function (response) {
+      return client.get('/projects/' + response.body[0].projectCanonicalName + '/builds/' + response.body[0].number);
     })
-    .then(function (build) {
-      return client.get('/projects/' + build.projectCanonicalName);
+    .then(function (response) {
+      return client.get('/projects/' + response.body.projectCanonicalName);
+    })
+    .then(function (response) {
+      return response.body;
     });
 };
